@@ -293,6 +293,7 @@ class Photo(db.Model):
     flag: Mapped[int] = mapped_column(default=0)
 
     author_id: Mapped[int] = mapped_column(ForeignKey('user.id', ondelete='CASCADE'))
+    caption: Mapped[Optional[str]] = mapped_column(String(500))
 
     author: Mapped['User'] = relationship(back_populates='photos')
     comments: WriteOnlyMapped['Comment'] = relationship(

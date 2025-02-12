@@ -9,6 +9,19 @@ from moments.forms.main import CommentForm, DescriptionForm, TagForm
 from moments.models import Collection, Comment, Follow, Notification, Photo, Tag, User
 from moments.notifications import push_collect_notification, push_comment_notification
 from moments.utils import flash_errors, redirect_back, rename_image, resize_image, validate_image
+import time
+import os
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    print("ML module is Loading...")
+    start_time = time.time()
+    # ML module
+    from moments.ml.image_caption import load_caption_tools, caption_image
+    from moments.ml.object_detection import query
+    # load the captioning model
+    caption_model, caption_vis_processors = load_caption_tools()
+    print(f"ML module Took: {round(time.time()-start_time, 3)} to load!. ")
 
 main_bp = Blueprint('main', __name__)
 
@@ -130,14 +143,34 @@ def upload():
         if not validate_image(f.filename):
             return 'Invalid image.', 400
         filename = rename_image(f.filename)
-        f.save(current_app.config['MOMENTS_UPLOAD_PATH'] / filename)
+        f_path = os.path.join(current_app.config['MOMENTS_UPLOAD_PATH'], filename) # need this to pull image for captioning model
+        f.save(f_path)
         filename_s = resize_image(f, filename, current_app.config['MOMENTS_PHOTO_SIZES']['small'])
         filename_m = resize_image(f, filename, current_app.config['MOMENTS_PHOTO_SIZES']['medium'])
+        caption = caption_image(caption_model, caption_vis_processors, f_path) # using original image path here
+        print(caption)
         photo = Photo(
-            filename=filename, filename_s=filename_s, filename_m=filename_m, author=current_user._get_current_object()
+            filename=filename, filename_s=filename_s, filename_m=filename_m, author=current_user._get_current_object(),caption=caption,
         )
+
+# Object detection to generate tags
+        tags = query(f_path)
+        # Save tags
+        for t in tags:
+            tag = Tag.query.filter_by(name=t).first()
+            if tag is None:
+                tag = Tag(name=t)
+                db.session.add(tag)
+                db.session.commit()
+            if tag not in photo.tags:
+                photo.tags.append(tag)
+                db.session.commit()
+
         db.session.add(photo)
         db.session.commit()
+        print(photo.caption)
+        return render_template('main/upload.html', filename=filename, caption=caption)
+
     return render_template('main/upload.html')
 
 
@@ -155,7 +188,7 @@ def show_photo(photo_id):
     description_form = DescriptionForm()
     tag_form = TagForm()
 
-    description_form.description.data = photo.description
+    description_form.description.data = photo.caption
     return render_template(
         'main/photo.html',
         photo=photo,
