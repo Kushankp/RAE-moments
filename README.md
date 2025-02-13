@@ -24,30 +24,6 @@ $ pdm install
 > [!TIP]
 > If you don't have PDM installed, you can create a virtual environment with `venv` and install dependencies with `pip install -r requirements.txt`.
 
-To initialize the app, run the `flask init-app` command:
-
-```
-$ pdm run flask init-app
-```
-
-If you just want to try it out, generate fake data with `flask lorem` command then run the app:
-
-```
-$ pdm run flask lorem
-```
-
-It will create a test account:
-
--   email: `admin@helloflask.com`
--   password: `moments`
-
-Now you can run the app:
-
-```
-$ pdm run flask run
-* Running on http://127.0.0.1:5000/
-```
-
 ## Image Captioning using BLIP Model (moments\moments\ml\image_caption.py)
 
 This script uses the BLIP (Bootstrapping Language-Image Pretraining) model to generate captions for images. It employs PyTorch for processing and the lavis library for loading the pre-trained model and image preprocessing. The model is capable of generating descriptive captions for input images.
@@ -92,6 +68,15 @@ $ pip install torch
 ```
 $ pip install lavis
 ```
+
+or
+Clone the repo: `$ git clone https://github.com/salesforce/LAVIS.git`.
+Change directory : `cd lavis`
+pip install `requirements.txt`.
+Install the package with `pip install -e .`
+
+any open3d error: `pip install open3d==0.19.0`
+then reinstall: `pip install salesforce-lavis`
 
 3. Install Pillow for image handling:
 
@@ -147,6 +132,30 @@ $ pip install requests python-dotenv
 
 load_api_key(): Loads the API key and endpoint from the .env file and checks that they are correctly set.
 query(filename): Sends the image located at filename to Azure’s Object Detection API and returns a list of detected objects.
+
+## To initialize the app, run the `flask init-app` command:
+
+```
+$ pdm run flask init-app
+```
+
+If you just want to try it out, generate fake data with `flask lorem` command then run the app:
+
+```
+$ pdm run flask lorem
+```
+
+It will create a test account:
+
+-   email: `admin@helloflask.com`
+-   password: `moments`
+
+Now you can run the app:
+
+```
+$ pdm run flask run
+* Running on http://127.0.0.1:5000/
+```
 
 ## Output:![OUTPUT](image.png)
 
