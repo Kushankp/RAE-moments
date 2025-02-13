@@ -43,13 +43,13 @@ This script uses the BLIP (Bootstrapping Language-Image Pretraining) model to ge
 `RuntimeError: module compiled against ABI version 0x1000009 but this version of numpy is 0x2000000`
 
 SOLUTION:
-
+```
 pip install numpy==1.21.0
 pip uninstall opencv-python
 pip install opencv-python
 pip cache purge
 pip install numpy torch lavis
-
+```
 Make sure all other dependencies are compatible with the current version of NumPy. You can use the following command to list installed packages and their versions:
 
 ```
