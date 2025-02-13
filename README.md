@@ -37,7 +37,8 @@ This script uses the BLIP (Bootstrapping Language-Image Pretraining) model to ge
 5. GPU (optional but recommended for better performance)
 6. opencv2
 
-## If you encounter the following error:
+> [!TIP]
+> If you encounter the following error:
 
 `RuntimeError: module compiled against ABI version 0x1000009 but this version of numpy is 0x2000000`
 
@@ -69,14 +70,15 @@ $ pip install torch
 $ pip install lavis
 ```
 
-or
-Clone the repo: `$ git clone https://github.com/salesforce/LAVIS.git`.
-Change directory : `cd lavis`
-pip install `requirements.txt`.
-Install the package with `pip install -e .`
+> [!OR]
+> Clone the repo: `$ git clone https://github.com/salesforce/LAVIS.git`.
+> Change directory : `cd lavis`
+> pip install `requirements.txt`.
+> Install the package with `pip install -e .`
 
-any open3d error: `pip install open3d==0.19.0`
-then reinstall: `pip install salesforce-lavis`
+> [!TIP]
+> any open3d error: `pip install open3d==0.19.0`
+> then reinstall: `pip install salesforce-lavis`
 
 3. Install Pillow for image handling:
 
