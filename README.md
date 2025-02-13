@@ -30,7 +30,7 @@ This script uses the BLIP (Bootstrapping Language-Image Pretraining) model to ge
 
 `Requirements`:
 
-1. Python 3.x(3.11 recommended)
+1. Python 3.x
 2. PyTorch
 3. lavis library (for loading the model and image processors)
 4. Pillow library for image handling
