@@ -148,6 +148,14 @@ $ pip install requests python-dotenv
 load_api_key(): Loads the API key and endpoint from the .env file and checks that they are correctly set.
 query(filename): Sends the image located at filename to Azure’s Object Detection API and returns a list of detected objects.
 
+## Output:![OUTPUT](image.png)
+
+Upon successfully uploading an image, both the image captioning and object detection models run on the uploaded image.
+
+Initially, there is no description displayed.
+When the Edit Description button is clicked, the automatically generated caption from the image captioning model appears in the description field.
+Additionally, relevant tags are generated based on the object detection results, which are shown after the image is successfully uploaded.
+
 ## License
 
 This project is licensed under the MIT License (see the
