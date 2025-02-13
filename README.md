@@ -43,6 +43,7 @@ This script uses the BLIP (Bootstrapping Language-Image Pretraining) model to ge
 `RuntimeError: module compiled against ABI version 0x1000009 but this version of numpy is 0x2000000`
 
 SOLUTION:
+
 ```
 pip install numpy==1.21.0
 pip uninstall opencv-python
@@ -50,6 +51,7 @@ pip install opencv-python
 pip cache purge
 pip install numpy torch lavis
 ```
+
 Make sure all other dependencies are compatible with the current version of NumPy. You can use the following command to list installed packages and their versions:
 
 ```
@@ -110,6 +112,16 @@ This script integrates with Azure's Computer Vision API to perform object detect
 2. Azure Computer Vision API key and endpoint
 3. requests library for API calls
 4. python-dotenv library for managing environment variables
+
+## Connecting to the Azure Vision API
+
+1. Sign up for the a student account for Microsoft Azure: https://azure.microsoft.com/en-us/free/students/ – no credit card required
+
+2. Create an instance of the Computer Vision service and get an API endpoint of your instance of the service.
+
+3. Get a subscription key to authorize your script to call the Computer Vision API.
+
+4. Update the code with the endpoint and key and test it.
 
 Installation
 
