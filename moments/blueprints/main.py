@@ -143,11 +143,11 @@ def upload():
         if not validate_image(f.filename):
             return 'Invalid image.', 400
         filename = rename_image(f.filename)
-        f_path = os.path.join(current_app.config['MOMENTS_UPLOAD_PATH'], filename) # need this to pull image for captioning model
+        f_path = os.path.join(current_app.config['MOMENTS_UPLOAD_PATH'], filename) #Save the image
         f.save(f_path)
         filename_s = resize_image(f, filename, current_app.config['MOMENTS_PHOTO_SIZES']['small'])
         filename_m = resize_image(f, filename, current_app.config['MOMENTS_PHOTO_SIZES']['medium'])
-        caption = caption_image(caption_model, caption_vis_processors, f_path) # using original image path here
+        caption = caption_image(caption_model, caption_vis_processors, f_path) #Generate caption
         print(caption)
         photo = Photo(
             filename=filename, filename_s=filename_s, filename_m=filename_m, author=current_user._get_current_object(),caption=caption,
@@ -155,7 +155,7 @@ def upload():
 
 # Object detection to generate tags
         tags = query(f_path)
-        # Save tags
+        #tags = ['dog', 'cat']
         for t in tags:
             tag = Tag.query.filter_by(name=t).first()
             if tag is None:
