@@ -24,7 +24,7 @@ $ pdm install
 > [!TIP]
 > If you don't have PDM installed, you can create a virtual environment with `venv` and install dependencies with `pip install -r requirements.txt`.
 
-## Image Captioning using BLIP Model (moments\moments\ml\image_caption.py)
+## Image Captioning using BLIP Model ([(https://github.com/Kushankp/RAE-moments/blob/main/moments/ml/image_caption.py)])
 
 This script uses the BLIP (Bootstrapping Language-Image Pretraining) model to generate captions for images. It employs PyTorch for processing and the lavis library for loading the pre-trained model and image preprocessing. The model is capable of generating descriptive captions for input images.
 
@@ -102,7 +102,7 @@ load_caption_tools(name, model_type): Loads the BLIP caption model and correspon
 
 caption_image(model, vis_processors, image_path): Takes the loaded model and the pre-processing tools to generate a caption for the image located at image_path.
 
-## Azure Object Detection (moments\moments\ml\object_detection.py)
+## Azure Object Detection ([(https://github.com/Kushankp/RAE-moments/blob/main/moments/ml/object_detection.py)])
 
 This script integrates with Azure's Computer Vision API to perform object detection on an input image. It loads environment variables from a .env file, containing your Azure API key and endpoint, and sends a request to Azure’s Object Detection API to identify objects in the image.
 
